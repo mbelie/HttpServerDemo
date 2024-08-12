@@ -1,7 +1,7 @@
 # HttpServerDemo
 
 ## Summary
-This .NET Core solution demonstrates a simple HTTP server that exposes a weather forecast endpoint. The weather foreast endpoint relies on the [National Weather Service](https://www.weather.gov/documentation/services-web-api) API to return weather forecast data for a given latitude/longitude 
+This .NET Core 8.0 solution demonstrates a simple HTTP server that exposes a weather forecast endpoint. The weather foreast endpoint relies on the [National Weather Service](https://www.weather.gov/documentation/services-web-api) API to return weather forecast data for a given latitude/longitude 
 
 ## Projects
 - Http
