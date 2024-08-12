@@ -1,0 +1,25 @@
+# VS user files
+
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+
+*.suo
+*.user
+*.vspscc
+*.vssscc
+.vs/
+
+# bin, obj dirs
+**/bin/*
+/bin/*
+*/obj/*
+**/obj/*
+
+TestResults
+
+# databases
+*.mdf
+*.ldf
+
+# Jetbrains project files
+.idea/
