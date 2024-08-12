@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpServerConsole", "HttpServerConsole\HttpServerConsole.csproj", "{68BB2BD4-BAE0-4076-B55C-45E368270265}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Http", "Http\Http.csproj", "{BDF1AD37-A6AB-4C4E-88B0-A6C4CBE17452}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpTests", "HttpTests\HttpTests.csproj", "{73800DA9-153A-4956-A176-328B366BE203}"
@@ -10,8 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherService", "WeatherService\WeatherService.csproj", "{1ED87B1A-9F81-4879-9E28-ECF675CE6E6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherServiceTests", "WeatherServiceTests\WeatherServiceTests.csproj", "{CD0E02B0-CB1C-4DDB-9D75-E3463F082097}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpServerConsole", "HttpServerConsole\HttpServerConsole.csproj", "{68BB2BD4-BAE0-4076-B55C-45E368270265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
