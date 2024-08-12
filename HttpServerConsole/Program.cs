@@ -5,7 +5,7 @@ using Http.Cache;
 using Http.Interfaces;
 using Http.Middleware;
 using Http.Models;
-using HttpServer.Configuration;
+using HttpServerConsole.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

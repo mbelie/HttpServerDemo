@@ -1,6 +1,6 @@
 ﻿using Http.Interfaces;
 
-namespace HttpServer.Configuration;
+namespace HttpServerConsole.Configuration;
 
 public class HttpServerConfiguration : IHttpServerConfiguration
 {

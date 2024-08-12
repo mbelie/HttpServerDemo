@@ -1,15 +1,13 @@
-# HTTP Server & Weather Service Demo
+# HttpServerDemo
 
 ## Summary
-This solution demonstrates a simple .NET architecture with two main components
-1. A simple/lightweight HTTP server
-2. An implementation of an HTTP endpoint that consumes data from the [National Weather Service](https://www.weather.gov/documentation/services-web-api) in order to return weather forecast data for a given latitude/longitude 
+This .NET Core solution demonstrates a simple HTTP server that exposes a weather forecast endpoint. The weather foreast endpoint relies on the [National Weather Service](https://www.weather.gov/documentation/services-web-api) API to return weather forecast data for a given latitude/longitude 
 
 ## Projects
 - Http
   - A .NET Core class library
   - Contains HTTP related concrete types and interfaces including SimpleHttpServer
-- HttpServer
+- HttpServerConsole
    - A .NET Core console application that provides the entry point for the demo
    - The application hosts an HTTP server (via SimpleHttpServer) that can be accessed from a browser, Postman, etc
    - The application has an appsettings.json file where the user can configure the port of the HTTP server and a User-Agent string (required by the National Weather Service API)
