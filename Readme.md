@@ -33,6 +33,6 @@ This .NET Core 8.0 solution demonstrates a simple HTTP server that exposes a wea
 - Ensure that the HttpSever project is set as the startup project
 - Press F5
 - Open a browser and enter a URL with the following format (use the port specified in appsettings.json): 
-   - Format: http://localhost:{**port**}/Weather/{**latitude**},{**longitude**}
+   - Format: ht<span>tp://</span>localhost:&lt;port&gt;/Weather/&gt;latitude&gt;,&lt;longitude&gt;
    - Example: http://localhost:9000/Weather/33.7070,-117.0845
 - JSON responses will appear in the browser
