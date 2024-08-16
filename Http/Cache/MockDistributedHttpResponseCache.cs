@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace Http.Cache;
 
 /// <summary>
-///     NOTE: This type is for demo purposes only. Prefer a production distribute cache like Memcached or Redis
+///     NOTE: This type is for demo purposes only. Prefer a production distributed cache like Memcached or Redis
 ///     in order to support dynamic scaling/scaling out
 /// </summary>
 public class MockDistributedHttpResponseCache : IHttpResponseCache

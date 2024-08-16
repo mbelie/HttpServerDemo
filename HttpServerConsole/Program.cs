@@ -40,7 +40,6 @@ server.Use(new RateLimiter());
 server.RegisterEndpoint(WeatherEndpointPattern,
     async context =>
     {
-        // TODO: Resolve the weather service and call it here instead
         var match = parameterRegex.Match(context.Request.Url!.OriginalString);
 
         if (match.Success)

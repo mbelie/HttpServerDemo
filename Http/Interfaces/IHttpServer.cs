@@ -1,4 +1,4 @@
-﻿using Http.Models;
+﻿using Http.Delegates;
 
 namespace Http.Interfaces;
 

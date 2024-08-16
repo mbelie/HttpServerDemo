@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Http.Delegates;
 using Http.Interfaces;
-using Http.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Http;
@@ -56,8 +56,18 @@ public class SimpleHttpServer : IHttpServer
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
-                // TODO: Consider queuing tasks and starting max N workers to process
-                var context = await _listener.GetContextAsync().ConfigureAwait(false);
+                HttpListenerContext context;
+                
+                try
+                {
+                    // TODO: Consider queuing tasks and starting max N workers to process
+                    context = await _listener.GetContextAsync().ConfigureAwait(false);
+                }
+                catch (HttpListenerException e)
+                {
+                    _logger.LogInformation("Server stopped");
+                    break;
+                }
 
                 // NOTE: Only supporting gets in this HTTP server. Requires extension to support other verbs.
                 if (context.Request.HttpMethod.ToLower() != GetMethodName)
