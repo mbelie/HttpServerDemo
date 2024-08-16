@@ -80,7 +80,8 @@ public class SimpleHttpServer : IHttpServer
                 if (endpointHandler == null)
                 {
                     _logger.LogInformation($"No handler for path \"{context.Request.Url}\"");
-                    Process404(context);
+                    EmitResponse(context, HttpStatusCode.NotFound, "Path not supported");
+
                     continue;
                 }
 
@@ -128,9 +129,9 @@ public class SimpleHttpServer : IHttpServer
         _delegateMap[endpointPattern] = handler;
     }
 
-    private Task Process404(HttpListenerContext context)
+    private Task EmitResponse(HttpListenerContext context, HttpStatusCode statusCode, string error)
     {
-        return Task.Run(async () => { await WriteResponse(context, "Path not supported", HttpStatusCode.NotFound); },
+        return Task.Run(async () => { await WriteResponse(context, error, statusCode); },
             _cancellationTokenSource!.Token);
     }
 
@@ -168,36 +169,43 @@ public class SimpleHttpServer : IHttpServer
     {
         return Task.Run(async () =>
         {
-            foreach (var middleware in _middleware)
+            try
             {
-                var proceed = await middleware.Handle(context);
-                if (!proceed)
+                foreach (var middleware in _middleware)
                 {
-                    _logger.LogInformation(
-                        $"Middleware {middleware.GetType()} indicated the request pipeline should be terminated");
-                    return;
-                }
-            }
-
-            var cacheKey = context.Request.Url!.OriginalString;
-
-            var cachedResponse = await _cache.Get(cacheKey);
-
-            if (cachedResponse != null)
-            {
-                _logger.LogDebug($"Found a cached result for \"{cacheKey}\"");
-                await WriteResponse(context, cachedResponse.ToString() ?? string.Empty, HttpStatusCode.OK);
-            }
-            else
-            {
-                var result = await handler(context);
-                if (result.StatusCode == HttpStatusCode.OK)
-                {
-                    // No need to await this
-                    _cache.Put(new KeyValuePair<string, object>(cacheKey, result.Response), result.TimeToLiveSeconds);
+                    var proceed = await middleware.Handle(context);
+                    if (!proceed)
+                    {
+                        _logger.LogInformation(
+                            $"Middleware {middleware.GetType()} indicated the request pipeline should be terminated");
+                        return;
+                    }
                 }
 
-                await WriteResponse(context, result.Response, result.StatusCode);
+                var cacheKey = context.Request.Url!.OriginalString;
+
+                var cachedResponse = await _cache.Get(cacheKey);
+
+                if (cachedResponse != null)
+                {
+                    _logger.LogDebug($"Found a cached result for \"{cacheKey}\"");
+                    await WriteResponse(context, cachedResponse.ToString() ?? string.Empty, HttpStatusCode.OK);
+                }
+                else
+                {
+                    var result = await handler(context);
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        // No need to await this
+                        _cache.Put(new KeyValuePair<string, object>(cacheKey, result.Response), result.TimeToLiveSeconds);
+                    }
+
+                    await WriteResponse(context, result.Response, result.StatusCode);
+                }
+            }
+            catch (Exception e)
+            {
+                EmitResponse(context, HttpStatusCode.InternalServerError, e.Message);
             }
         });
     }
